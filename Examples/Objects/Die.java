@@ -1,14 +1,16 @@
 public class Die {
     private long numberOfSides;
     private long faceUpSide;
+    public static final long DEFAULT_NUMBER_OF_SIDES = 6;
+    public static final long MINIMUM_NUMBER_OF_SIDES = 2;
 
     public Die() {
-        this.numberOfSides = 6;
+        this.numberOfSides = DEFAULT_NUMBER_OF_SIDES;
         this.faceUpSide = 1;
     }
 
     public Die(long numberOfSides) {
-        if (numberOfSides < 2) {
+        if (numberOfSides < MINIMUM_NUMBER_OF_SIDES) {
             throw new IllegalArgumentException();
         }
         this.numberOfSides = numberOfSides;
@@ -24,7 +26,7 @@ public class Die {
     }
 
     public void setNumberOfSides(long newSides) {
-        if (newSides < 2) {
+        if (newSides < MINIMUM_NUMBER_OF_SIDES) {
             throw new IllegalArgumentException();
         }
         numberOfSides = newSides;
@@ -38,6 +40,11 @@ public class Die {
             throw new IllegalArgumentException();
         }
         faceUpSide = newFaceUpSide;
+    }
+
+    public long roll() {
+        this.faceUpSide = (long)Math.floor((Math.random() * this.numberOfSides) + 1);
+        return faceUpSide;
     }
 
     @Override
@@ -57,5 +64,10 @@ public class Die {
         Die other = (Die)obj;
         return (this.numberOfSides == other.numberOfSides)
                 && (this.faceUpSide == other.faceUpSide);
+    }
+
+    @Override
+    public String toString() {
+        return "D" + this.numberOfSides + ": " + this.faceUpSide;
     }
 }
