@@ -39,4 +39,23 @@ public class Die {
         }
         faceUpSide = newFaceUpSide;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Die other = (Die)obj;
+        return (this.numberOfSides == other.numberOfSides)
+                && (this.faceUpSide == other.faceUpSide);
+    }
 }
